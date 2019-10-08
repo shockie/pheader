@@ -1,0 +1,4 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome %{email}, to %{name}!", name: "Pheader", email: @current_user.email %></h1>
+  <p>A Minimal RSS Reader platform build for the fun of it</p>
+</section>
