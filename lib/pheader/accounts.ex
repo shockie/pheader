@@ -1,12 +1,12 @@
-defmodule Pheader.UserManager do
+defmodule Pheader.Accounts do
   @moduledoc """
-  The UserManager context.
+  The Accounts context.
   """
 
   import Ecto.Query, warn: false
   alias Pheader.Repo
 
-  alias Pheader.Users.User
+  alias Pheader.Accounts.User
 
   @doc """
   Returns the list of users.

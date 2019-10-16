@@ -13,7 +13,7 @@ config :pheader,
 # Configures the endpoint
 config :pheader, PheaderWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "dLSuTkCezkF5MaMtvwGv4chRGz86hSd3LSEvH93B1O8WCPYeRMvgsy6sw5+e5+Oz",
+  secret_key_base: "nAN6e7x3AajhcaKiM/xGWp94YShYjSbYuvww6Sm/Wcyzvaa9Bw87YM1cKV9E/JOR",
   render_errors: [view: PheaderWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Pheader.PubSub, adapter: Phoenix.PubSub.PG2]
 
@@ -24,19 +24,6 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
-config :pheader, :pow,
-  user: Pheader.Users.User,
-  repo: Pheader.Repo,
-  web_module: PheaderWeb
-
-config :pheader, :pow_assent,
-  providers: [
-    github: [
-      client_id: "b884cd6e0437ad73c95c",
-      client_secret: "284bad6adc851a71fffbd29161e9f7b68eb20df3",
-      strategy: Assent.Strategy.Github
-    ]
-  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

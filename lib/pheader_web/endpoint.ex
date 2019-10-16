@@ -40,7 +40,7 @@ defmodule PheaderWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_pheader_key",
-    signing_salt: "/Jv/bwYZ"
-  plug Pow.Plug.Session, otp_app: :pheader
+    signing_salt: "g5BaBR4z"
+
   plug PheaderWeb.Router
 end

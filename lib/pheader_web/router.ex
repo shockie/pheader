@@ -1,12 +1,5 @@
 defmodule PheaderWeb.Router do
   use PheaderWeb, :router
-  use Pow.Phoenix.Router
-  use PowAssent.Phoenix.Router
-
-  pipeline :protected do
-    plug Pow.Plug.RequireAuthenticated,
-      error_handler: Pow.Phoenix.PlugErrorHandler
-  end
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -20,16 +13,12 @@ defmodule PheaderWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/" do
-    pipe_through [:browser]
-    pow_routes()
-    pow_assent_routes()
-  end
-
   scope "/", PheaderWeb do
-    pipe_through [:browser, :protected]
+    pipe_through :browser
 
     get "/", PageController, :index
+    resources "/users", UserController, only: [:new, :create],
+      singleton: true
   end
 
   # Other scopes may use custom stacks.
