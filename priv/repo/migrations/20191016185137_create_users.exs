@@ -4,6 +4,7 @@ defmodule Pheader.Repo.Migrations.CreateUsers do
   def change do
     create table(:users) do
       add :email, :string
+      add :encrypted_password, :string
 
       timestamps()
     end
