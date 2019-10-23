@@ -7,6 +7,7 @@ defmodule Pheader.Accounts do
   alias Pheader.Repo
 
   alias Pheader.Accounts.User
+  alias Argon2
 
   @doc """
   Returns the list of users.
@@ -36,6 +37,8 @@ defmodule Pheader.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+
+  def get_user(id), do: Repo.get(User, id)
 
   @doc """
   Creates a user.
@@ -100,5 +103,21 @@ defmodule Pheader.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  def authenticate_user(email, password) do
+    query = from u in User, where: u.email == ^email
+
+    case Repo.one(query) do
+      nil ->
+        Argon2.no_user_verify()
+        {:error, :invalid_credentials}
+      user ->
+        if Argon2.verify_pass(password, user.encrypted_password) do
+          {:ok, user}
+        else
+          {:error, :invalid_credentials}
+        end
+    end
   end
 end

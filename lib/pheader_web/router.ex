@@ -1,6 +1,14 @@
 defmodule PheaderWeb.Router do
   use PheaderWeb, :router
 
+  pipeline :auth do
+    plug Pheader.Accounts.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -19,6 +27,18 @@ defmodule PheaderWeb.Router do
     get "/", PageController, :index
     resources "/users", UserController, only: [:new, :create],
       singleton: true
+  end
+
+  scope "/api", PheaderWeb do
+    pipe_through [:api, :auth]
+
+    post "/auth/token", AuthController, :sign_in
+  end
+
+  scope "/api", PheaderWeb do
+    pipe_through [:api, :auth, :ensure_auth]
+
+    get "/hello", PageController, :hello
   end
 
   # Other scopes may use custom stacks.
