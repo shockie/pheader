@@ -1,3 +1,6 @@
 /* This file is for your main application css. */
+@import "~bulma";
 
-@import "./phoenix.css";
+h1 {
+  color: blue;
+}
