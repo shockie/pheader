@@ -1,6 +1,6 @@
 /* This file is for your main application css. */
-@import "~bulma";
+@import "~bulma/bulma";
 
-h1 {
-  color: blue;
+.main-section {
+  height: calc(100vh - 3.5rem);
 }

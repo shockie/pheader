@@ -10,28 +10,25 @@ import css from "../css/app.scss"
 // Import dependencies
 //
 import "phoenix_html"
+import "regenerator-runtime/runtime";
+import Vue from 'vue'
+import Buefy from 'buefy'
 
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 //
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Buefy from 'buefy'
 import Base from 'components/layouts/Base'
-import routes from './routes'
-
-const router = new VueRouter({
-  routes
-})
+import router from './router'
+import store from './store'
 
 Vue.use(Buefy)
-Vue.use(VueRouter)
 
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     Base
   },
