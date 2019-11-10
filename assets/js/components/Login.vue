@@ -17,6 +17,8 @@
                   type="password"
                 )
               .field
+                b-checkbox(v-model="rememberMe") Remember me
+              .field
                 .control
                   b-button(type="is-primary", native-type="submit") Login
 
@@ -33,7 +35,8 @@ export default {
       user: {
         email: null,
         password: null
-      }
+      },
+      rememberMe: false
     }
   },
   methods: {
@@ -42,7 +45,7 @@ export default {
     ]),
     async submit(){
       try {
-        await this.login(this.user)
+        await this.login({...this.user, rememberMe: this.rememberMe})
         if (this.$route.query.redirect) {
           this.$router.push(this.$route.query.redirect)
         } else {

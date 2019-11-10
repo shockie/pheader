@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import axios from 'axios'
+import { fetchCurrentUser } from 'services/user'
 
 Vue.use(Vuex)
 
@@ -24,6 +25,9 @@ const store = new Vuex.Store({
     setCurrentUser(state, user) {
       state.user = user
     },
+    setToken(state, token) {
+      state.user.token = token
+    },
     clearToken(state) {
       state.user = {
         id: null,
@@ -33,7 +37,23 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    async login({ commit }, { email, password }) {
+    loggedIn({ commit, getters }) {
+      const localToken = window.localStorage.getItem('token')
+      if (getters.loggedIn) {
+        return true
+      } else if(localToken) {
+        fetchCurrentUser().then((user) => {
+          commit('setCurrentUser', {
+            token: localToken,
+            ...user
+          })
+        })
+        return true
+      }
+
+      return false
+    },
+    async login({ commit }, { email, password, rememberMe }) {
       const response = await axios.post('/api/auth/token', {
         user: {
           email,
@@ -47,6 +67,10 @@ const store = new Vuex.Store({
           password,
           token: response.data.token
         })
+
+        if(rememberMe) {
+          window.localStorage.setItem('token', response.data.token)
+        }
         return response.data.token
       }
 

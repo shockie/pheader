@@ -39,6 +39,7 @@ defmodule PheaderWeb.Router do
     pipe_through [:api, :auth, :ensure_auth]
 
     get "/hello", PageController, :hello
+    get "/me", UserController, :me
   end
 
   # Other scopes may use custom stacks.

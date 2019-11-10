@@ -15,9 +15,9 @@ const router = new VueRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.loggedIn) {
+    if (await store.dispatch('loggedIn')) {
       next()
     } else {
       next({
