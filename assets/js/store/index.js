@@ -1,11 +1,15 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import axios from 'axios'
+import feeds from 'store/modules/feeds'
 import { fetchCurrentUser } from 'services/user'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
+  modules: {
+    feeds 
+  },
   state: {
     user: {
       id: null,
