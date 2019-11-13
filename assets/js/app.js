@@ -23,7 +23,9 @@ import Base from 'components/layouts/Base'
 import router from './router'
 import store from './store'
 
-Vue.use(Buefy)
+Vue.use(Buefy, {
+  defaultIconPack: 'fas'
+})
 
 new Vue({
   el: '#app',

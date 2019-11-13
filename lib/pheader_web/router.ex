@@ -38,8 +38,9 @@ defmodule PheaderWeb.Router do
   scope "/api", PheaderWeb do
     pipe_through [:api, :auth, :ensure_auth]
 
-    get "/hello", PageController, :hello
     get "/me", UserController, :me
+
+    resources "/feeds", FeedController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.

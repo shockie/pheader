@@ -21,7 +21,8 @@
         )
           router-link(:to="{ name: 'login' }" class="button") Login
     .base-layout-content
-      router-view
+      section.section
+        router-view
 </template>
 
 <script>

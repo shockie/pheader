@@ -1,4 +1,7 @@
+import { create } from 'services/feed'
+
 export default {
+  namespaced: true,
   state: {
     feeds: []
   },
@@ -10,6 +13,15 @@ export default {
   mutations: {
     addFeed(state, feed) {
       state.feeds.push(feed)
+    }
+  },
+  actions: {
+    async addFeed({ commit }, params) {
+      const data = await create(params)
+
+      commit('addFeed', data)
+
+      return data
     }
   }
 }

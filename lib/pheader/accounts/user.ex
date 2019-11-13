@@ -2,10 +2,14 @@ defmodule Pheader.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Pheader.Feeds.Feed
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
     field :encrypted_password, :string
+
+    has_many :feeds, Feed
 
     timestamps()
   end
